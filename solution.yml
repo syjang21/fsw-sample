@@ -1,0 +1,14 @@
+appAcronym: "FLY"
+appName: "Fly Service"
+appIcon: ""
+appDescription: ""
+appType: "DDD"
+category: "DOMAINSERVICE"
+creationTs: "1666317203204"
+creator: "seckyoung jang"
+creatorId: "85e917bb-c234-47a1-84ad-1dcead26ece0"
+domainTags: ["SAGA"]
+language: "JAVA"
+basePackage: "com.kbstar.fly"
+extensions:
+ databaseType: "rdbms"
