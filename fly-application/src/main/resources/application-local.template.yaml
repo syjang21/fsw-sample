@@ -1,0 +1,75 @@
+spring:
+  config:
+     activate:
+       on-profile: local
+
+  data:
+    # Mongo DB configuration
+    mongodb:
+      uri: <mongo-db-uri>
+      database: <db-name>
+      secretName: # read from kubernetes secret
+  security:
+    oauth2:
+      client: #Spring Security OAuth2  config
+        provider:
+          default:
+            issuer-uri: <issuer-uri>
+        registration:
+          default:
+            client-id: <client-id>
+
+springdoc:
+  swagger-ui:
+    oauth:
+      clientId: <client-id>
+
+server:
+  port: 8080
+  ssl:
+    enabled: false
+
+feature:
+  kafka-events:
+    enabled: true
+  mongo:
+    enabled: true
+  security:
+    enabled: true
+  openapi:
+    enabled: true
+  webmvc:
+    enabled: true
+
+de:
+  knowis:
+    cp:
+      consumer:
+        kubernetes:
+          namespace: "dev-br"
+    oidc:
+      clientRegistrationId: <OAuth2 client Id>
+
+#Component configuration
+de.knowis.cp.deployment.identifier: ""
+de.knowis.cp.server.baseurl: "http://localhost:8080"
+
+# Topic Binding(s) & Kafka Binding(s) local configurations
+de.knowis.cp.binding.topic:
+  topicBindings:
+    <Topic Alias>:
+      topicName: ""
+      kafkaBinding: ""
+  kafkaBindings:
+    <Kafka Secret>
+      kafka_brokers_sasl: ""
+      password: ""
+      user: ""
+
+#Api Binding from local configuration
+de.cp.consumer.api.binding:
+  bindingProperties:
+    <Binding Name> :
+      url: ""
+      k5PropagateSecurityToken:
+      caCert: ""

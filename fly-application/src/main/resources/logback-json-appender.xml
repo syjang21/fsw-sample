@@ -1,0 +1,123 @@
+<included>
+
+  <appender name="JSON_CONSOLE"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <encoder
+      class="net.logstash.logback.encoder.LogstashEncoder">
+      <!-- https://github.com/logstash/logstash-logback-encoder -->
+      <timeZone>UTC</timeZone>
+      <includeCallerData>true</includeCallerData>
+      <!-- traceId is the same as X-B3-TraceId -->
+      <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+      <!-- spanId is the same as X-B3-SpanId -->
+      <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+      <!-- parentId is the same as X-B3-ParentSpanId -->
+      <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+      <!-- spanExportable is the same as X-Span-Export -->
+      <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+      <!-- We don't need the HTTP language information -->
+      <excludeMdcKeyName>X-Language</excludeMdcKeyName>
+      <throwableConverter
+        class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+        <maxDepthPerThrowable>25</maxDepthPerThrowable>
+        <maxLength>10240</maxLength>
+        <shortenedClassNameLength>15</shortenedClassNameLength>
+        <rootCauseFirst>true</rootCauseFirst>
+        <!-- generated class names -->
+        <exclude>\$\$FastClassBySpringCGLIB\$\$</exclude>
+        <exclude>\$\$FastClassByCGLIB\$\$</exclude>
+        <exclude>\$\$EnhancerBySpringCGLIB\$\$</exclude>
+        <exclude>^sun\.reflect\..*\.invoke</exclude>
+        <!-- JDK internals -->
+        <exclude>^com\.sun\.</exclude>
+        <exclude>^sun\.net\.</exclude>
+        <!-- dynamic invocation -->
+        <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+        <exclude>^org\.springframework\.cglib\.</exclude>
+        <exclude>^org\.springframework\.transaction\.</exclude>
+        <exclude>^org\.springframework\.validation\.</exclude>
+        <exclude>^org\.springframework\.app\.</exclude>
+        <exclude>^org\.springframework\.aop\.</exclude>
+        <exclude>^java\.lang\.reflect\.Method\.invoke</exclude>
+        <!-- Spring plumbing -->
+        <exclude>^org\.springframework\.ws\..*\.invoke</exclude>
+        <exclude>^org\.springframework\.ws\.transport\.</exclude>
+        <exclude>^org\.springframework\.ws\.soap\.saaj\.SaajSoapMessage\.
+        </exclude>
+        <exclude>^org\.springframework\.ws\.client\.core\.WebServiceTemplate\.
+        </exclude>
+        <exclude>^org\.springframework\.web\.filter\.</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.doFilter</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.doFilterInternal
+        </exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.invoke</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.filterAndRecordMetrics
+        </exclude>
+        <exclude>^brave\.servlet\.TracingFilter\.</exclude>
+        <exclude>^org\.springframework.security\.oauth2\.provider\.authentication\.OAuth2AuthenticationProcessingFilter\.
+        </exclude>
+        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\$Worker\.run
+        </exclude>
+        <!-- Tomcat internals -->
+        <exclude>^org\.apache\.tomcat\.</exclude>
+        <exclude>^org\.apache\.catalina\.</exclude>
+        <exclude>^org\.apache\.coyote\.</exclude>
+        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\.runWorker
+        </exclude>
+        <exclude>^java\.lang\.Thread\.run$</exclude>
+      </throwableConverter>
+      <provider
+        class="net.logstash.logback.composite.loggingevent.StackHashJsonProvider">
+        <!-- generated class names -->
+        <exclude>\$\$FastClassBySpringCGLIB\$\$</exclude>
+        <exclude>\$\$FastClassByCGLIB\$\$</exclude>
+        <exclude>\$\$EnhancerBySpringCGLIB\$\$</exclude>
+        <exclude>^sun\.reflect\..*\.invoke</exclude>
+        <!-- JDK internals -->
+        <exclude>^com\.sun\.</exclude>
+        <exclude>^sun\.net\.</exclude>
+        <!-- dynamic invocation -->
+        <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+        <exclude>^org\.springframework\.cglib\.</exclude>
+        <exclude>^org\.springframework\.transaction\.</exclude>
+        <exclude>^org\.springframework\.validation\.</exclude>
+        <exclude>^org\.springframework\.app\.</exclude>
+        <exclude>^org\.springframework\.aop\.</exclude>
+        <exclude>^java\.lang\.reflect\.Method\.invoke</exclude>
+        <!-- Spring plumbing -->
+        <exclude>^org\.springframework\.ws\..*\.invoke</exclude>
+        <exclude>^org\.springframework\.ws\.transport\.</exclude>
+        <exclude>^org\.springframework\.ws\.soap\.saaj\.SaajSoapMessage\.
+        </exclude>
+        <exclude>^org\.springframework\.ws\.client\.core\.WebServiceTemplate\.
+        </exclude>
+        <exclude>^org\.springframework\.web\.filter\.</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.doFilter</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.doFilterInternal
+        </exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.invoke</exclude>
+        <exclude>^org\.springframework\..*\.web\..*\.filterAndRecordMetrics
+        </exclude>
+        <exclude>^brave\.servlet\.TracingFilter\.</exclude>
+        <exclude>^org\.springframework.security\.oauth2\.provider\.authentication\.OAuth2AuthenticationProcessingFilter\.
+        </exclude>
+        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\$Worker\.run
+        </exclude>
+        <!-- Tomcat internals -->
+        <exclude>^org\.apache\.tomcat\.</exclude>
+        <exclude>^org\.apache\.catalina\.</exclude>
+        <exclude>^org\.apache\.coyote\.</exclude>
+        <exclude>^java\.util\.concurrent\.ThreadPoolExecutor\.runWorker
+        </exclude>
+        <exclude>^java\.lang\.Thread\.run$</exclude>
+      </provider>
+    </encoder>
+  </appender>
+
+  
+  <appender name="ASYNC_JSON_CONSOLE"
+    class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="JSON_CONSOLE" />
+    <includeCallerData>true</includeCallerData>
+  </appender>
+</included>

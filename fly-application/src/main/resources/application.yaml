@@ -1,0 +1,29 @@
+management:
+  endpoints:
+    web.exposure.include: "*"
+  health:
+    mongo:
+      enabled: false
+logging:
+  level:
+    com.kbstar.fly: INFO
+    org.springframework.security: INFO
+# Spring Security OAuth2  config
+spring.security:
+  oauth2:
+    client:
+      registration:
+        default:
+          client-id:
+      provider:
+        default:
+          issuer-uri:
+springdoc:
+  api-docs:
+    enabled: true
+    path: /${solution.acronym}/api-docs
+  swagger-ui:
+    oauth:
+      clientId: "getsreplaced"
+solution:
+  acronym: "fly"
